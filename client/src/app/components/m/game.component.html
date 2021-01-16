@@ -1,0 +1,75 @@
+<mat-card class="p-0 m-1" fxFlex>
+    <div class="m-1" *ngIf="!gameStarted" fxLayout="column">
+        <h1 *ngIf="!creating && !joining" class="text-center">{{message}}</h1>
+        <button *ngIf="!creating && !joining" type="button" color="primary" (click)="createRoom()" mat-raised-button>Create room</button>
+        <button *ngIf="!creating && !joining" type="button" color="warn" (click)="joinRoom()" class="mt-1" mat-raised-button>Join room</button>
+        <form *ngIf="creating && !joining" [formGroup]="form" fxLayout="column" class="mt-1">
+            <mat-form-field appearance="outline">
+                <mat-label>Room</mat-label>
+                <input type="text" matInput formControlName="room" placeholder="Your room name.">
+                <mat-error>Please enter your room name.</mat-error>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="outline"> 
+                <mat-label>[Optional] Password</mat-label>
+                <input [type]="hide ? 'password' : 'text'" matInput formControlName="password" placeholder="Your password." autocomplete="off">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error>Please enter your password.</mat-error>
+            </mat-form-field> -->
+            <button type="button" color="primary" (click)="onSubmit()" [disabled]="form.invalid" mat-raised-button>Submit</button>
+            <button type="button" class="mt-1" (click)="back()" mat-raised-button color="accent">Back</button>
+        </form>
+        <div *ngIf="joining && !creating" fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="center space-between">
+                <button type="button" fxFlex="80" (click)="refresh()" mat-raised-button color="primary">Refresh</button>
+                <span class="spacer"></span>
+                <button type="button" fxFlex="15" class="m1-1" (click)="back()" mat-raised-button color="accent">Back</button>
+            </div>
+            <div fxLayout="column">
+                <mat-card class="mt-1" fxLayoutAlign="row">
+                    <strong fxFlex="80">
+                        <span>Room name</span>
+                    </strong>
+                    <strong fxFlex="10">
+                        Players
+                    </strong>
+                    <span class="spacer"></span>
+                    <strong>
+                        <span>Host name</span>
+                    </strong>
+                </mat-card>
+                <mat-card *ngIf="hosts.length <= 0" class="m-1 text-center">
+                    No rooms available!
+                </mat-card>
+                <ng-container *ngFor="let i of hosts">
+                    <mat-card *ngIf="i['players'] <= 3" mat-raised-button class="mt-1 hover" [routerLink]="['/main',i['code']]" fxLayoutAlign="row">
+                        <span fxFlex="80">
+                            {{i['room']}}
+                        </span>
+                        <span fxFlex="10">
+                            {{i['players']}}/4
+                        </span>
+                        <span class="spacer"></span>
+                        <span>
+                            {{i['name']}}
+                        </span>
+                    </mat-card>
+                    <mat-card *ngIf="i['players'] >= 4" class="background-grey" mat-raised-button class="mt-1" fxLayoutAlign="row">
+                        <span fxFlex="80">
+                            {{i['room']}}
+                        </span>
+                        <span fxFlex="10">
+                            {{i['players']}}/4
+                        </span>
+                        <span class="spacer"></span>
+                        <span>
+                            {{i['name']}}
+                        </span>
+                    </mat-card>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div id="game" fxFill fxLayoutAlign="center center"></div>
+</mat-card>
