@@ -11,10 +11,8 @@ const AWS = require('aws-sdk')
 global.env = secure({secret: process.env.ENV_PASSWORD})
 
 //######## MONGO ########
-const MONGO_USER = global.env.MONGO_USER
 const MONGO_PASS = global.env.MONGO_PASS
 const MONGO_DB = global.env.MONGO_DB
-const MONGO_DBNAME = global.env.MONGO_DBNAME
 const MONGO_COLLECTION = global.env.MONGO_COLLECTION
 const MONGO_COLLECTION2 = global.env.MONGO_COLLECTION2
 const MONGO_URL = `mongodb+srv://bin:${MONGO_PASS}@cluster0.uagd3.mongodb.net/${MONGO_DB}?retryWrites=true&w=majority`

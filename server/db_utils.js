@@ -6,7 +6,7 @@ const fs = require('fs')
 const path = require('path')
 
 // Retrieve env variables
-const { MONGO_DB, mongo, AWS_ENDPOINT, s3, MONGO_COLLECTION } = require('./server_config.js')
+const { MONGO_DB, mongo, s3, MONGO_COLLECTION } = require('./server_config.js')
 
 // Reads the file using fs and returns the buffer as a promise
 const myReadFile = (file) => new Promise((resolve, reject) => {
