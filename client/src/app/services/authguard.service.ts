@@ -14,7 +14,7 @@ export class AuthGuardService implements CanActivate {
   constructor(private router:Router, private http:HttpClient, private auth:AuthService, private snackbar:MatSnackBar) {
     this.token = sessionStorage.getItem('token')
     this.user = JSON.parse(sessionStorage.getItem('user'))
-    const path = window.location.pathname.split('/')
+    const path = window.location.hash.split('/')
     if (this.token == '' || this.token == null) {
       if (!(path[1] == 'reset')) {
         this.router.navigate(['/login'])

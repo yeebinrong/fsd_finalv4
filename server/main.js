@@ -485,7 +485,6 @@ app.ws('/room',
                 }
             }
         }
-        console.info(BACKGROUND[code])
     }
     HOSTS[code].players = HOSTS[code].players ? HOSTS[code].players + 1 : 1
     // create a room[code] if not exist else [username] will have undefined room[code] error
@@ -534,7 +533,7 @@ app.ws('/room',
             y: ROOMS[code][username].data.y,
         })
         broadcastMsg(code, chat)
-        broadcastMsg(code, chat2)
+        // broadcastMsg(code, chat2)
     }
 
 
@@ -551,13 +550,13 @@ app.ws('/room',
         ROOMS[code][username].send(q)
         console.info("sending")
     }
-    TO_SEND.push(chat)
+    // TO_SEND.push(chat)
 
     const chat2 = JSON.stringify({
         type: 'generate_rock',
         tiles: BACKGROUND[code]
     })
-    ROOMS[code][username].send(chat2)
+    // ROOMS[code][username].send(chat2)
 
     ws.on('message', (string) => {
         processMessage(string, code, ROOMS[code][username], ROOMS[code])

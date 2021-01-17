@@ -1,4 +1,3 @@
-import { sha1 } from '@angular/compiler/src/i18n/digest';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -27,15 +26,17 @@ export class ForgotComponent implements OnInit {
     this.token = this.activatedRoute.snapshot.params.code
     if (!!this.token) {
       this.token = this.token.split('-').join('.')
-      this.authSvc.verifyToken(this.token)
-      .then (bool => {
-          this.valid = bool
-          if (!bool) {
-          // token is invalid / expired
-          this.token = ''
-          this.router.navigate(['/reset'])
-        }
-      })
+      console.info(this.token)
+      // this.authSvc.verifyToken(this.token)
+      // .then (bool => {
+      //     this.valid = bool
+      //     if (!bool) {
+      //     // token is invalid / expired
+      //     console.info(bool)
+      //     this.token = ''
+      //     // this.router.navigate(['/reset'])
+      //   }
+      // })
     }
   }
 
