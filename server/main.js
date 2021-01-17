@@ -368,8 +368,9 @@ app.post('/api/reset', (req, resp) => {
         if (!!data[0]) {
             let token = signResetToken(data[0])
             try {
-                token = token.split('.').join('')
-                const url = `http://${req.get('host')}/#/reset/${token}`
+                token = token.split('.').join('-')
+                const url = `https://mychatapp.yeebinrong.vercel.app/reset/${token}`
+                // const url = `http://localhost:3000/reset/${token}`
                 sendEmail(req.body, url)
                 resp.status(200)
                 resp.type('application/json')

@@ -41,7 +41,7 @@ export class WebSocketService {
 	}
 
   setRoomDetails (values) {
-    console.info("room details are",values)
+    // console.info("room details are",values)
     this.roomDetails = values
   }
   getRoomDetails () {
@@ -109,7 +109,7 @@ export class WebSocketService {
     const user = this.authSvc.getProfile()
     payload.name = user['name']
     payload.type = 'chatting'
-    console.info("sending message",payload)
+    // console.info("sending message",payload)
     this.ws.send(JSON.stringify(payload))
   }
 

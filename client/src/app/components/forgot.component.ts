@@ -27,16 +27,16 @@ export class ForgotComponent implements OnInit {
     if (!!this.token) {
       this.token = this.token.split('-').join('.')
       console.info(this.token)
-      // this.authSvc.verifyToken(this.token)
-      // .then (bool => {
-      //     this.valid = bool
-      //     if (!bool) {
-      //     // token is invalid / expired
-      //     console.info(bool)
-      //     this.token = ''
-      //     // this.router.navigate(['/reset'])
-      //   }
-      // })
+      this.authSvc.verifyToken(this.token)
+      .then (bool => {
+          this.valid = bool
+          if (!bool) {
+          // token is invalid / expired
+          console.info(bool)
+          this.token = ''
+          this.router.navigate(['/reset'])
+        }
+      })
     }
   }
 
